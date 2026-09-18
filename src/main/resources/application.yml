@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: coldchain-park
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+park:
+  # 预约时间窗口默认步长（分钟）
+  slot-minutes: 30
+  # 单月台同时只能接 1 辆车；每 30 分钟标准卸货能力 1 车
+  dock-count: 6
+  # 质检班组：白班 8-20 点可同时质检 3 车，夜班 20-次日8 点 1 车
+  qc-day-capacity: 3
+  qc-night-capacity: 1
+  # 晚到容忍分钟数，超过即标记 LATE
+  late-tolerance-minutes: 30
+  # 温度采样允许最大间隔（分钟），超过判定曲线断点
+  temp-gap-minutes: 20
+  # 封签不匹配 / 司机证件过期是否硬拦截闸口
+  strict-gate: true
+  # 夜间时段
+  night-start-hour: ${PARK_NIGHT_START_HOUR:22}
+  night-end-hour: ${PARK_NIGHT_END_HOUR:6}
+
+logging:
+  level:
+    org.hibernate.SQL: WARN

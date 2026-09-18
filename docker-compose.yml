@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-coldchain}
+      POSTGRES_USER: ${POSTGRES_USER:-cold}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-coldpass}
+    # 数据库端口不对宿主发布，仅在 compose 内网通过服务名 db 互访
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cold} -d ${POSTGRES_DB:-coldchain}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-coldchain}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-cold}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-coldpass}
+      # 园区运营参数（可被 .env 覆盖）
+      PARK_NIGHT_START_HOUR: ${PARK_NIGHT_START_HOUR:-22}
+      PARK_NIGHT_END_HOUR: ${PARK_NIGHT_END_HOUR:-6}
+    ports:
+      - "${CC_PUBLISH_PORT}:8080"
+    restart: unless-stopped
+
+volumes:
+  pgdata:

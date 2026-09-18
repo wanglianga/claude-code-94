@@ -1,0 +1,99 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #eef3f8; color: #1f2d3d; font-size: 14px; }
+button { cursor: pointer; border: none; border-radius: 6px; padding: 7px 14px; background: #e3eaf3; color: #1f2d3d; font-size: 13px; }
+button:hover { filter: brightness(0.96); }
+button.primary { background: #1d6fe0; color: #fff; }
+button.danger { background: #d9480f; color: #fff; }
+button.warn { background: #f08c00; color: #fff; }
+button.ok { background: #2b8a3e; color: #fff; }
+button.ghost { background: transparent; border: 1px solid #b6c4d4; }
+button.big { width: 100%; padding: 11px; font-size: 15px; margin-top: 6px; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+input, select, textarea { padding: 8px 10px; border: 1px solid #c3cfdd; border-radius: 6px; font-size: 13px; width: 100%; margin: 4px 0 10px; background: #fff; }
+textarea { min-height: 60px; }
+label { font-size: 12px; color: #5b6b7f; font-weight: 600; }
+
+/* 登录 */
+.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #0f4c81 0%, #1d6fe0 100%); padding: 20px; }
+.login-card { background: #fff; border-radius: 14px; padding: 34px 38px; width: 480px; box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+.login-card h1 { font-size: 22px; line-height: 1.4; color: #0f4c81; }
+.login-card .sub { color: #6b7c8f; margin: 10px 0 20px; font-size: 13px; }
+.demo-accounts { margin-top: 18px; border-top: 1px dashed #c3cfdd; padding-top: 14px; }
+.demo-accounts table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.demo-accounts th, .demo-accounts td { padding: 5px 6px; text-align: left; font-size: 12px; border-bottom: 1px solid #eef2f7; }
+.demo-accounts tr:nth-child(n+2):hover { background: #f0f6ff; cursor: pointer; }
+
+/* 顶栏 */
+header { background: #0f4c81; color: #fff; display: flex; align-items: center; padding: 0 22px; height: 56px; gap: 26px; }
+header .brand { font-weight: 700; font-size: 16px; }
+header nav { display: flex; gap: 18px; flex: 1; }
+header nav a { color: #cfe2f8; text-decoration: none; font-size: 14px; }
+header nav a:hover { color: #fff; }
+.userbox { font-size: 13px; display: flex; gap: 10px; align-items: center; }
+.userbox button { color: #fff; border-color: #7fa8d4; }
+
+main { padding: 20px 24px; max-width: 1500px; margin: 0 auto; }
+
+/* 看板 */
+.board-head { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+.board-head .stat { background: #fff; border-radius: 8px; padding: 8px 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06); font-size: 13px; }
+.board-head .stat b { color: #1d6fe0; font-size: 16px; }
+.power-alert { background: #fff4e6; border: 1px solid #ffa94d; color: #b25f00; padding: 8px 14px; border-radius: 8px; font-weight: 600; }
+.board-cols { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.board-col { background: #dce7f3; border-radius: 10px; padding: 10px; min-height: 200px; }
+.board-col h3 { font-size: 13px; padding: 4px 6px 10px; display: flex; justify-content: space-between; }
+.board-col h3 span { background: #1d6fe0; color: #fff; border-radius: 10px; padding: 0 8px; font-size: 12px; }
+
+.card { background: #fff; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.07); cursor: pointer; }
+.card:hover { outline: 2px solid #1d6fe0; }
+.card .code { font-weight: 700; color: #0f4c81; font-size: 13px; }
+.card .plate { font-size: 16px; font-weight: 700; margin: 2px 0; }
+.card .meta { color: #6b7c8f; font-size: 12px; }
+.badge { display: inline-block; border-radius: 10px; padding: 1px 9px; font-size: 11px; font-weight: 600; }
+.badge.gray { background: #e9edf2; color: #5b6b7f; }
+.badge.blue { background: #d0ebff; color: #1864ab; }
+.badge.green { background: #d3f9d8; color: #2b8a3e; }
+.badge.orange { background: #ffe8cc; color: #d9480f; }
+.badge.red { background: #ffe3e3; color: #c92a2a; }
+.badge.purple { background: #e5dbff; color: #5f3dc4; }
+
+/* 详情布局 */
+.layout { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+.panel { background: #fff; border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(0,0,0,.06); margin-bottom: 14px; }
+.panel h2 { font-size: 15px; color: #0f4c81; margin-bottom: 12px; border-left: 4px solid #1d6fe0; padding-left: 8px; }
+.kv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 14px; font-size: 13px; }
+.kv div b { color: #6b7c8f; font-weight: 500; margin-right: 4px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+table.data { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.data th, table.data td { border: 1px solid #e4ebf3; padding: 6px 8px; text-align: left; }
+table.data th { background: #f4f8fc; }
+
+.timeline-item { border-left: 3px solid #1d6fe0; padding: 4px 0 12px 12px; position: relative; }
+.timeline-item::before { content: ""; position: absolute; left: -7px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: #1d6fe0; }
+.timeline-item .t-time { color: #8496a8; font-size: 11px; }
+.timeline-item .t-actor { font-weight: 700; font-size: 12.5px; }
+.timeline-item .t-action { font-size: 13px; }
+.timeline-item .t-detail { color: #5b6b7f; font-size: 12px; margin-top: 2px; }
+
+.ex-item { border: 1px solid #ffe3e3; background: #fff9f9; border-radius: 8px; padding: 10px; margin-bottom: 8px; }
+.ex-item.handled { border-color: #d3f9d8; background: #f7fff8; }
+.ex-item .ex-head { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 4px; }
+
+.script-box { background: #ebf5ff; border: 1px solid #a5d8ff; border-radius: 8px; padding: 12px; line-height: 1.7; font-size: 13px; }
+.money { font-size: 20px; font-weight: 700; color: #d9480f; }
+.backlink { color: #1d6fe0; cursor: pointer; font-size: 13px; margin-bottom: 10px; display: inline-block; }
+.section-flag { font-size: 12px; color: #8496a8; margin: 4px 0 8px; }
+.hidden { display: none; }
+
+#toast { position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+  background: #2b8a3e; color: #fff; padding: 10px 22px; border-radius: 8px; font-size: 14px;
+  opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 999; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+
+@media (max-width: 1100px) {
+  .board-cols { grid-template-columns: repeat(3, 1fr); }
+  .layout { grid-template-columns: 1fr; }
+}
