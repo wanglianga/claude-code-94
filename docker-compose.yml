@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-coldchain}
+      POSTGRES_USER: ${POSTGRES_USER:-cold}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-coldpass}
+    # 数据库端口不发布到宿主，仅在 compose 内网通过服务名 db 访问
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cold} -d ${POSTGRES_DB:-coldchain}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-coldchain}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-cold}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-coldpass}
+      # 园区运营基准时间（演示用）。留空则使用容器真实时间。
+      PARK_CLOCK: ${PARK_CLOCK:-}
+      JAVA_OPTS: ${JAVA_OPTS:--XX:MaxRAMPercentage=75.0}
+    ports:
+      - "${CC_PUBLISH_PORT}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/api/health >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 90s
+    restart: unless-stopped
+
+volumes:
+  db-data:
